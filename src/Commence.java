@@ -30,5 +30,6 @@ public class Commence {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		etch.startGame();
+		frame.addMouseListener(etch);
 	}
 }

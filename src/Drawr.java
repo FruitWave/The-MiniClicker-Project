@@ -12,14 +12,17 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.event.MouseInputListener;
+
+import org.w3c.dom.events.EventTarget;
+import org.w3c.dom.views.AbstractView;
 
 @SuppressWarnings("serial")
-public class Drawr extends JPanel implements ActionListener, KeyListener, MouseListener {
+public class Drawr extends JPanel implements ActionListener, KeyListener, MouseInputListener {
 	Timer speed;
 	Manager master;
 	Font font;
-	Font font2;
-	Font font3;
+	Font megafont;
 	final static int MENU_STATE = 0;
 	final static int GAME_STATE = 1;
 	final static int END_STATE = 2;
@@ -32,8 +35,9 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseL
 	// JButton butn;
 
 	public Drawr() {
-		speed = new Timer(1000 / 150, this);
+		speed = new Timer(1, this);
 		font = new Font("Monaco", Font.PLAIN, 24);
+		megafont = new Font("Monaco", Font.PLAIN, 72);
 		// butn = new JButton();
 		// butn.setBounds((Commence.width / 5), Commence.height * 2 / 3, 200, 40);
 		// butn.setVisible(true);
@@ -75,6 +79,8 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseL
 
 	void updateGameState() {
 		master.update();
+		master.manageEnemies();
+
 	}
 
 	void updateMenuState() {
@@ -131,18 +137,21 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseL
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		System.out.println("oh.");
+		if ((((e.getX() >= sgbLBx) && (e.getX() <= sgbHBx)) && ((e.getY() >= sgbHBy) && (e.getY() <= sgbLBy)))
+				&& currentState == MENU_STATE) {
+			System.out.println("START!");
+			currentState = GAME_STATE;
 
+		}
+		master.drawrmx = e.getX();
+		master.drawrmy = e.getY();
+		master.drawrMousepoint = e.getPoint();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("oh.");
-		// TODO Auto-generated method stub
-		if (((e.getXOnScreen() >= sgbLBx) && (e.getXOnScreen() <= sgbHBx))
-				&& ((e.getYOnScreen() >= sgbHBy) && (e.getYOnScreen() <= sgbLBy))) {
-			System.out.println("START!");
-		}
+
 	}
 
 	@Override
@@ -152,13 +161,22 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseL
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+
+	}
+
 }
