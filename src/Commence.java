@@ -1,3 +1,6 @@
+import java.awt.Color;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class Commence {
@@ -11,15 +14,17 @@ public class Commence {
 	public Commence() {
 		frame = new JFrame();
 		etch = new Drawr();
+
 		setup();
 	}
 
 	public static void main(String[] args) {
+		Commence budding = new Commence();
 	}
 
 	void setup() {
 		frame.add(etch);
-		frame.setTitle("Horde Runner");
+		frame.setTitle("MiniClicker");
 		frame.addKeyListener(etch);
 		frame.setSize(width, height);
 		frame.setVisible(true);
