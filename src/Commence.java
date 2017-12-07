@@ -24,6 +24,6 @@ public class Commence {
 		frame.setSize(width, height);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Drawr.startGame();
+		etch.startGame();
 	}
 }

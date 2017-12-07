@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,17 +10,43 @@ import javax.swing.Timer;
 public class Drawr extends JPanel implements ActionListener, KeyListener {
 
 	Timer speed;
+	Manager master;
 	static int currentState = 0;
 	final static int MENU_STATE = 0;
 	final static int GAME_STATE = 1;
 	final static int END_STATE = 2;
 
-	Drawr() {
+	public Drawr() {
 		speed = new Timer(1000 / 150, this);
 	}
 
-	public static void startGame() {
+	public void startGame() {
 		speed.start();
+		master = new Manager(this);
+	}
+
+	private void drawGameState(Graphics connect) {
+		master.draw(connect);
+	}
+
+	private void drawMenuState(Graphics connect) {
+
+	}
+
+	private void drawEndState(Graphics connect) {
+
+	}
+
+	private void updateEndState() {
+
+	}
+
+	private void updateGameState() {
+		master.update();
+	}
+
+	private void updateMenuState() {
+
 	}
 
 	@Override
@@ -34,18 +61,6 @@ public class Drawr extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
-	}
-
-	private void updateEndState() {
-
-	}
-
-	private void updateGameState() {
-
-	}
-
-	private void updateMenuState() {
 
 	}
 
