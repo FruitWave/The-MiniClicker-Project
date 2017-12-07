@@ -70,7 +70,7 @@ public class Manager {
 			if (o1 instanceof Cloud) {
 				if (o1.collisionArea.contains(drawrMousepoint)) {
 					System.out.println(score);
-					score++;
+					score += ((Cloud) o1).pointsworth;
 					mousex = -1000;
 					mousey = -1000;
 					o1.isAlive = false;

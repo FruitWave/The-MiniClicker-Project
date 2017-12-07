@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class Cloud extends Objectal {
 	Drawr etch;
 	final int level;
+	final int pointsworth;
 	static int levelcheckmarker = 1;
 	int evolveLevelsAmbassador;
 	static boolean upgradableOnce = false;
@@ -37,6 +38,7 @@ public class Cloud extends Objectal {
 		evolveLevelsAmbassador = number;
 		setCloudColor(level);
 		this.etch = etch;
+		pointsworth = level * 2;
 	}
 
 	@Override
