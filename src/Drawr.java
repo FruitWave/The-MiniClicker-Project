@@ -8,7 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -35,11 +38,18 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseI
 	// JButton butn;
 	Cloud firstButton;
 	boolean fbShown = false;
+	static BufferedImage santahat;
 
 	public Drawr() {
 		speed = new Timer(1, this);
 		font = new Font("Monaco", Font.PLAIN, 24);
 		megafont = new Font("Monaco", Font.PLAIN, 48);
+		try {
+			santahat = ImageIO.read(this.getClass().getResourceAsStream("Santa's hat.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// butn = new JButton();
 		// butn.setBounds((Commence.width / 5), Commence.height * 2 / 3, 200, 40);
 		// butn.setVisible(true);
@@ -56,7 +66,7 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseI
 		if (!fbShown) {
 
 			fbShown = true;
-			firstButton = new Cloud(Commence.width / 2, Commence.height / 2, 300, 200, 1, this);
+			firstButton = new Cloud(Commence.width / 2, Commence.height / 2, 200, 139, 1, this);
 			master.addObject(firstButton);
 		}
 		master.draw(connect);

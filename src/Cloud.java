@@ -282,7 +282,8 @@ public class Cloud extends Objectal {
 
 	public void draw(Graphics g) {
 		g.setColor(dcolor);
-		g.fillRect(x, y, width, height);
+		g.fillRect(x - 20, y - 20, width + 40, height + 40);
+		g.drawImage(Drawr.santahat, x, y, null);
 		g.setColor(Color.BLACK);
 		g.fillRect(5, 5, 2000, 240);
 		g.setFont(etch.megafont);
