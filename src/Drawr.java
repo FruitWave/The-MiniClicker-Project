@@ -33,11 +33,13 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseI
 	int sgbHBy = Commence.height * 2 / 3;
 	int sgbLBy = (Commence.height * 2 / 3) + 40;
 	// JButton butn;
+	Cloud firstButton;
+	boolean fbShown = false;
 
 	public Drawr() {
 		speed = new Timer(1, this);
 		font = new Font("Monaco", Font.PLAIN, 24);
-		megafont = new Font("Monaco", Font.PLAIN, 72);
+		megafont = new Font("Monaco", Font.PLAIN, 48);
 		// butn = new JButton();
 		// butn.setBounds((Commence.width / 5), Commence.height * 2 / 3, 200, 40);
 		// butn.setVisible(true);
@@ -47,13 +49,21 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseI
 	public void startGame() {
 		speed.start();
 		master = new Manager(this);
+
 	}
 
 	void drawGameState(Graphics connect) {
+		if (!fbShown) {
+
+			fbShown = true;
+			firstButton = new Cloud(Commence.width / 2, Commence.height / 2, 300, 200, 1, this);
+			master.addObject(firstButton);
+		}
 		master.draw(connect);
 	}
 
 	void drawMenuState(Graphics connect) {
+
 		setBackground(Color.darkGray);
 		int startx = (Commence.width / 5);
 		int starty = (Commence.height / 3) - (Commence.height / 5) + (Commence.height / 8);
@@ -94,7 +104,27 @@ public class Drawr extends JPanel implements ActionListener, KeyListener, MouseI
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_U) {
+			// for (Objectal cloudly : master.objects) {
+			// if (cloudly instanceof Cloud) {
+			// if (((Cloud) cloudly).upgradable) {
+			// ((Cloud) cloudly).upgrade();
+			if (firstButton.upgradable) {
+				firstButton.upgrade();
+			}
+			// }
+			// }
+			// }
+		} else if (e.getKeyCode() == KeyEvent.VK_C) {
+			// for (Objectal cloudly : master.objects) {
+			// if (cloudly instanceof Cloud) {
+			// ((Cloud) cloudly).clicksDone++;
+			// }
+			// }
 
+			firstButton.clicksDone += 100;
+			firstButton.clicksBank += 100;
+		}
 	}
 
 	@Override

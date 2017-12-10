@@ -14,6 +14,7 @@ public class Manager {
 	int drawrmx;
 	int drawrmy;
 	public Point drawrMousepoint;
+	private Point makeBelieveMousepoint = new Point(-100, -100);
 	public static int score;
 
 	public Manager(Drawr etch) {
@@ -54,11 +55,22 @@ public class Manager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			Cloud.upgradableOnce = true;
-			numclouds++;
-			addObject(new Cloud(new Random().nextInt(Commence.width), new Random().nextInt(Commence.height), 100, 100,
-					numclouds, etch));
-			enemyTimer = System.currentTimeMillis();
+			// Cloud.upgradableOnce = true;
+			// numclouds++;
+			// addObject(new Cloud(new Random().nextInt(Commence.width), new
+			// Random().nextInt(Commence.height), 100, 100,
+			// numclouds, etch));
+			// enemyTimer = System.currentTimeMillis();
+		}
+	}
+
+	public void checkForUpgrades() {
+		for (int i = 0; i < objects.size(); i++) {
+			if (objects.get(i) instanceof Cloud) {
+				if (((Cloud) objects.get(i)).upgradable) {
+					((Cloud) objects.get(i)).upgrade();
+				}
+			}
 		}
 	}
 
@@ -68,12 +80,13 @@ public class Manager {
 			Objectal o1 = objects.get(i);
 			// Objectal o2 = objects.get(j);
 			if (o1 instanceof Cloud) {
-				if (o1.collisionArea.contains(drawrMousepoint)) {
-					System.out.println(score);
-					score += ((Cloud) o1).pointsworth;
-					mousex = -1000;
-					mousey = -1000;
-					o1.isAlive = false;
+				Cloud wow = (Cloud) o1;
+				if (wow.collisionArea.contains(drawrMousepoint)) {
+					// score += wow.pointsworth;
+					// System.out.println(score);
+					drawrMousepoint = makeBelieveMousepoint;
+					wow.clicksDone++;
+					wow.clicksBank++;
 				}
 			}
 

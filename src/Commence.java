@@ -19,7 +19,7 @@ public class Commence {
 	}
 
 	public static void main(String[] args) {
-		Commence budding = new Commence();
+		Commence christmas = new Commence();
 	}
 
 	void setup() {

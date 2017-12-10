@@ -3,57 +3,212 @@ import java.awt.Graphics;
 
 public class Cloud extends Objectal {
 	Drawr etch;
-	final int level;
-	final int pointsworth;
-	static int levelcheckmarker = 1;
-	int evolveLevelsAmbassador;
-	static boolean upgradableOnce = false;
-	static double levelUpNumRequirement = 10;
+	int level;
+	double clicksDone = 0.0;
+	double pointsworth;
+	double clicksRequired;
+	int pointsEarned;
+	double clicksTotalNeededToUpgrade;
+	int proposedLevel;
+	boolean upgradable;
+	double clicksBank;
 	Color dcolor;
-	Color lvl1color = new Color(0, 255, 10);
-	Color lvl2color = new Color(10, 10, 10);
-	Color lvl3color = new Color(20, 10, 10);
-	Color lvl4color = new Color(0, 0, 255);
-	Color lvl5color = new Color(20, 20, 20);
-	Color lvl6color = new Color(20, 20, 30);
-	Color lvl7color = new Color(255, 0, 0);
-	Color lvl8color = new Color(30, 40, 30);
-	Color lvl9color = new Color(40, 40, 40);
-	Color lvl10color = new Color(255, 255, 0);
-	Color lvl11color = new Color(60, 80, 40);
-	Color lvl12color = new Color(60, 80, 100);
-	Color lvl13color = new Color(0, 255, 255);
-	Color lvl14color = new Color(120, 140, 100);
-	Color lvl15color = new Color(120, 140, 160);
-	Color lvl16color = new Color(255, 0, 255);
-	Color lvl17color = new Color(180, 200, 160);
-	Color lvl18color = new Color(180, 200, 220);
-	Color lvl19color = new Color(240, 200, 220);
-	Color lvl20color = new Color(255, 255, 255);
+	Color lvl1color = Color.CYAN;
+	Color lvl2color = Color.BLUE;
+	Color lvl3color = Color.MAGENTA;
+	Color lvl4color = Color.BLACK;
+	Color lvl5color = Color.GREEN;
+	Color lvl6color = Color.ORANGE;
+	Color lvl7color = Color.YELLOW;
+	Color lvl8color = Color.LIGHT_GRAY;
+	Color lvl9color = Color.DARK_GRAY;
+	Color lvl10color = Color.yellow;
+	Color lvl11color = Color.red;
+	Color lvl12color = Color.pink;
+	Color lvl13color = Color.orange;
+	Color lvl14color = Color.lightGray;
+	Color lvl15color = Color.darkGray;
+	Color lvl16color = Color.CYAN;
+	Color lvl17color = Color.blue;
+	Color lvl18color = Color.green;
+	Color lvl19color = Color.magenta;
+	Color lvl20color = Color.white;
 
 	public Cloud(int x, int y, int width, int height, int number, Drawr etch) {
 		super(x, y, width, height);
-		evolveLevels(number);
-		level = levelcheckmarker;
-		evolveLevelsAmbassador = number;
-		setCloudColor(level);
+		clicksBank = 0.0;
+		level = 1;
+		pointsEarned = number;
 		this.etch = etch;
-		pointsworth = level * 2;
+		pointsworth = setPointsWorth(level);
+		clicksTotalNeededToUpgrade = setClicksRequiredToUprade(level);
+		upgradable = false;
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		evolveLevels(evolveLevelsAmbassador);
-	}
-
-	void evolveLevels(int numOfClouds) {
-		if ((numOfClouds % levelUpNumRequirement == 0) && upgradableOnce) {
-			upgradableOnce = false;
-			levelcheckmarker++;
-			levelUpNumRequirement = (int) levelUpNumRequirement * 1.5;
+		setCloudColor(level);
+		pointsworth = setPointsWorth(level);
+		clicksTotalNeededToUpgrade = setClicksRequiredToUprade(level);
+		if (clicksBank - clicksTotalNeededToUpgrade >= 0) {
+			System.out.println("UPGRADABLE");
+			upgradable = true;
 		}
 
+	}
+
+	void upgrade(/* int numOfClouds */) {
+		// if ((numOfClouds % levelUpNumRequirement == 0) && upgradableOnce) {
+		// upgradableOnce = false;
+		// levelcheckmarker++;
+		// levelUpNumRequirement = (int) levelUpNumRequirement * 1.5;
+		// }
+		upgradable = false;
+		clicksBank -= clicksTotalNeededToUpgrade;
+		level++;
+
+	}
+
+	private double setPointsWorth(int levelly) {
+		switch (levelly) {
+		case 1:
+			return 1;
+
+		case 2:
+			return 5;
+
+		case 3:
+			return 10;
+
+		case 4:
+			return 50;
+
+		case 5:
+			return 100;
+
+		case 6:
+			return 200;
+
+		case 7:
+			return 500;
+
+		case 8:
+			return 2000;
+
+		case 9:
+			return 5000;
+
+		case 10:
+			return 10000;
+
+		case 11:
+			return 50000;
+
+		case 12:
+			return 200000;
+
+		case 13:
+			return 750000;
+
+		case 14:
+			return 2000000;
+
+		case 15:
+			return 50000000;
+
+		case 16:
+			return 1000000000;
+
+		case 17:
+			return 25000000000.0;
+
+		case 18:
+			return 500000000000.0;
+
+		case 19:
+			return 1000000000000.0;
+
+		case 20:
+			return 5000000000000000.0;
+
+		default:
+			Error tgle = new Error("\n Level is greater than 20. It is: " + level);
+			tgle.printStackTrace();
+			break;
+		}
+		return 0;
+	}
+
+	private double setClicksRequiredToUprade(int levelly) {
+		switch (levelly) {
+		case 1:
+			return 10;
+
+		case 2:
+			return 100;
+
+		case 3:
+			return 500;
+
+		case 4:
+			return 1000;
+
+		case 5:
+			return 10000;
+
+		case 6:
+			return 500000;
+
+		case 7:
+			return 2000000;
+
+		case 8:
+			return 50000000;
+
+		case 9:
+			return 1500000000;
+
+		case 10:
+			return 500000000000.0;
+
+		case 11:
+			return 5500000000000.0;
+
+		case 12:
+			return 100000000000000.0;
+
+		case 13:
+			return 5000000000000000.0;
+
+		case 14:
+			return 15000000000000000.0;
+
+		case 15:
+			return 55000000000000000.0;
+
+		case 16:
+			return 955000000000000000.0;
+
+		case 17:
+			return 5555000000000000000.0;
+
+		case 18:
+			return 5555000000000000000.0;
+		// 5 septillion
+
+		case 19:
+			return 999555000000000000000.0;
+
+		case 20:
+			return 999555999000000000000000.0;
+
+		default:
+			Error tgle = new Error("\n Level is greater than 20. It is: " + level);
+			tgle.printStackTrace();
+			break;
+		}
+		return 0;
 	}
 
 	public void setCloudColor(int lchkmrkr) {
@@ -119,6 +274,8 @@ public class Cloud extends Objectal {
 			dcolor = lvl20color;
 			break;
 		default:
+			Error tgle = new Error("\n Level is greater than 20. It is: " + level);
+			tgle.printStackTrace();
 			break;
 		}
 	}
@@ -127,10 +284,12 @@ public class Cloud extends Objectal {
 		g.setColor(dcolor);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.BLACK);
-		g.fillRect(5, 5, 1000, 120);
+		g.fillRect(5, 5, 2000, 240);
 		g.setFont(etch.megafont);
 		g.setColor(Color.WHITE);
-		g.drawString("Level: " + level + "    Score: " + etch.master.score, 10, 100);
+		g.drawString("Level: " + level + "    Clicks: " + clicksDone + "    Bank: " + clicksBank, 10, 100);
+		g.drawString("Upgradable: " + upgradable + "    Clicks To Next Upgrade: "
+				+ (clicksTotalNeededToUpgrade - clicksBank), 10, 200);
 	}
 
 }
